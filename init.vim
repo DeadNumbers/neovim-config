@@ -13,6 +13,10 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Plugin options
 Plug 'nsf/gocode', { 'branch': 'master', 'rtp': 'vim' }
@@ -28,13 +32,12 @@ Plug 'Shougo/deoplete-go'
 " Airline
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
 if strftime("%H") < 18
-  colorscheme OceanicNext
-"  set background = dark
+  colorscheme morning
 else
   colorscheme Tomorrow-Night
 endif
@@ -66,7 +69,7 @@ map <F2> :echo line(".") + 1<cr>
 
 " Scroll
 set scrolloff=0
-nnoremap <silent><expr> j line('w$') - line('.') < 8 ? "jz." : "j"
+nnoremap <silent><expr> j line('w$') - line('.') < 10 ? "j<C-e>" : "j"
 
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
