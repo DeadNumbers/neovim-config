@@ -13,7 +13,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -22,24 +22,30 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'nsf/gocode', { 'branch': 'master', 'rtp': 'vim' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 Plug 'fatih/vim-go'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/deoplete-go'
 
+Plug 'https://github.com/rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
+" Plug 'https://github.com/vim-scripts/AutoClose'
+Plug 'https://github.com/vim-scripts/PKGBUILD'
 
 " Airline
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
+Plug 'scwood/vim-hybrid'
 
 call plug#end()
 
-if strftime("%H") < 18
-  colorscheme morning
+if strftime("%H") > 18
+  colorscheme hybrid
 else
-  colorscheme Tomorrow-Night
+  colorscheme hybrid-light "Tomorrow-Night
 endif
 
 set smartindent
@@ -47,6 +53,7 @@ set encoding=utf-8
 set smartcase
 set number
 set noswapfile
+
 
 let g:deoplete#sources#go#align_class = 1
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
@@ -68,12 +75,15 @@ autocmd BufReadPost *
 map <F2> :echo line(".") + 1<cr>
 
 " Scroll
-set scrolloff=0
+set scrolloff=10
 nnoremap <silent><expr> j line('w$') - line('.') < 10 ? "j<C-e>" : "j"
+
+" Sudo write
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " Airline conf
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='lucius'
+let g:airline_theme='sol'
 let g:airline_powerline_fonts = 1
 
 " NerdTree
@@ -85,4 +95,5 @@ map <F4> :NERDTreeToggle<CR>
 map <C-w> :tabclose<CR>
 map <C-n> :tabnew<CR>
 map <C-Tab> :tabnext<CR>
+
 
